@@ -9,6 +9,7 @@ data class BEPill(
     @PrimaryKey(autoGenerate = true) var id:Int,
     var name: String,
     var dose: String,
+    var type: String,
     var description: String
 )
     : Serializable

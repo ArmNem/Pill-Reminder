@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_mypills"
+        android:icon="@drawable/ic_baseline_medication_24"
+        android:title="MyPills" />
+
+    <item
+        android:id="@+id/nav_myremiders"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="MyReminders" />
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_newreminder"
+        android:icon="@drawable/ic_baseline_edit_calendar_24"
+        android:title="NewReminder" />
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="Settings" />
+
+</menu>
