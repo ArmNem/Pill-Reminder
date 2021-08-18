@@ -1,7 +1,9 @@
 package com.example.pillreminder.GUI
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.pillreminder.GUI.Fragments.*
 import com.example.pillreminder.R
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         replaceFragment(homeFragment)
-
+        button.setOnClickListener { v -> onClickTest(v) }
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_mypills -> replaceFragment(myPillsFragment)
@@ -41,5 +43,10 @@ class MainActivity : AppCompatActivity() {
             transaction.replace(R.id.fragment_container, fragment)
             transaction.commit()
         }
+    }
+
+    fun onClickTest(view: View) {
+        val intent = Intent(this, Test::class.java)
+        startActivity(intent)
     }
 }

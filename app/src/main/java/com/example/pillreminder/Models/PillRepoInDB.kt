@@ -5,13 +5,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.room.Room
+import com.example.pillreminder.GUI.Fragments.MyPillsFragment
 import java.util.concurrent.Executors
 
 class PillRepoInDB {
 
     private val database: PillDatabase
 
-    private val personDao : PillDAO
+    private val pillDao : PillDAO
 
     private lateinit var cache: List<BEPill>
 
@@ -19,18 +20,18 @@ class PillRepoInDB {
 
         database = Room.databaseBuilder(context.applicationContext,
             PillDatabase::class.java,
-            "person-database").fallbackToDestructiveMigration().build()
+            "pill-database").fallbackToDestructiveMigration().build()
 
-        personDao = database.pillDao()
+        pillDao = database.pillDao()
 
-        val updateCacheObserver = Observer<List<BEPill>>{ persons ->
-            cache = persons;
+        val updateCacheObserver = Observer<List<BEPill>>{ pills ->
+            cache = pills;
 
         }
         getAllLiveData().observe(context as LifecycleOwner, updateCacheObserver)
     }
 
-    fun getAllLiveData(): LiveData<List<BEPill>> = personDao.getAll()
+    fun getAllLiveData(): LiveData<List<BEPill>> = pillDao.getAll()
 
 
     fun getById(id: Int): BEPill? {
@@ -52,19 +53,19 @@ class PillRepoInDB {
     private val executor = Executors.newSingleThreadExecutor()
 
     fun insert(p: BEPill) {
-        executor.execute{ personDao.insert(p) }
+        executor.execute{ pillDao.insert(p) }
     }
 
     fun update(p: BEPill) {
-        executor.execute { personDao.update(p) }
+        executor.execute { pillDao.update(p) }
     }
 
     fun delete(p: BEPill) {
-        executor.execute { personDao.delete(p) }
+        executor.execute { pillDao.delete(p) }
     }
 
     fun clear() {
-        executor.execute { personDao.deleteAll() }
+        executor.execute { pillDao.deleteAll() }
     }
 
 

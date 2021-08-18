@@ -4,22 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GUI.MainActivity">
+    tools:context=".GUI.Test">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <ListView
+        android:id="@+id/pillList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         android:layout_above="@id/bottom_navigation"
-        >
+        />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            android:onClick="onClickTest"/>
-    </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -28,6 +22,4 @@
         app:menu="@menu/bottom_navigation"
         android:background="?android:attr/windowBackground"
         />
-
-
 </RelativeLayout>
