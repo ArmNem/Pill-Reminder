@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.pillreminder.GUI.Fragments.*
+import com.example.pillreminder.GUI.Fragments.pills.MyPillsFragment
 import com.example.pillreminder.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val myPillsFragment = MyPillsFragment()
+    private val myPillsFragment =
+        MyPillsFragment()
     private val myRemindersFragment = MyRemindersFragment()
     private val homeFragment = HomeFragment()
     private val newReminderFragment = NewReminderFragment()

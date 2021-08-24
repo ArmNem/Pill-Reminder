@@ -5,7 +5,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.room.Room
-import com.example.pillreminder.GUI.Fragments.MyPillsFragment
+import com.example.pillreminder.data.BEPill
+import com.example.pillreminder.data.PillDAO
+import com.example.pillreminder.data.PillDatabase
 import java.util.concurrent.Executors
 
 class PillRepoInDB {
