@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/myPillsFragment">
 
+    <fragment
+        android:id="@+id/myPillsFragment"
+        android:name="com.example.pillreminder.GUI.Fragments.pills.MyPillsFragment"
+        android:label="fragment_my_pills"
+        tools:layout="@layout/fragment_pills" >
+        <action
+            android:id="@+id/action_myPillsFragment_to_addEditPillFragment"
+            app:destination="@id/addEditPillFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditPillFragment"
+        android:name="com.example.pillreminder.GUI.Fragments.pills.AddEditPillFragment"
+        android:label="fragment_add_edit_pill"
+        tools:layout="@layout/fragment_add_edit_pill" >
+        <argument
+            android:name="pill"
+            app:argType="com.example.pillreminder.data.BEPill"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

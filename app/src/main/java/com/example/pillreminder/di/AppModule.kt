@@ -21,7 +21,7 @@ object AppModule {
         app: Application,
         callback: PillDatabase.Callback
     ) =
-        Room.databaseBuilder(app, PillDatabase::class.java, "task_database")
+        Room.databaseBuilder(app, PillDatabase::class.java, "pill_database")
             .fallbackToDestructiveMigration()
             .addCallback(callback)
             .build()

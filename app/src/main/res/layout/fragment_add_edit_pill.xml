@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GUI.Fragments.pills.AddEditPillFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/edit_text_pillname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pill name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/edit_text_pilldose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pill dose"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/edit_text_pilltype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pill type"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/edit_text_pilldescript"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pill description"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_save_pill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_check_mark" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

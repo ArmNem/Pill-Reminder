@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PillDAO {
 
+    @Query("SELECT * FROM pill_table WHERE name LIKE '%' || :searchQuery || '%' ORDER by name")
+    fun getPillsBySearch(searchQuery: String): Flow<List<BEPill>>
+
     @Query("SELECT * from pill_table order by id")
     fun getAll(): Flow<List<BEPill>>
 

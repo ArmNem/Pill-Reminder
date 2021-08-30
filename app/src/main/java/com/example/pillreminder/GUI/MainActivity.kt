@@ -1,52 +1,39 @@
 package com.example.pillreminder.GUI
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.pillreminder.GUI.Fragments.*
 import com.example.pillreminder.GUI.Fragments.pills.MyPillsFragment
 import com.example.pillreminder.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val myPillsFragment =
-        MyPillsFragment()
-    private val myRemindersFragment = MyRemindersFragment()
-    private val homeFragment = HomeFragment()
-    private val newReminderFragment = NewReminderFragment()
-    private val settingsFragment = SettingsFragment()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        replaceFragment(homeFragment)
-        button.setOnClickListener { v -> onClickTest(v) }
-        bottom_navigation.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_mypills -> replaceFragment(myPillsFragment)
-                R.id.nav_myremiders -> replaceFragment(myRemindersFragment)
-                R.id.nav_home -> replaceFragment(homeFragment)
-                R.id.nav_newreminder -> replaceFragment(newReminderFragment)
-                R.id.nav_settings -> replaceFragment(settingsFragment)
-            }
-            true
-        }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.findNavController()
 
-    }
-    private fun replaceFragment(fragment: Fragment){
-        if(fragment != null)
-        {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
-            transaction.commit()
-        }
+        setupActionBarWithNavController(navController)
     }
 
-    fun onClickTest(view: View) {
-        val intent = Intent(this, Test::class.java)
-        startActivity(intent)
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
+
+const val ADD_PILL_RESULT_OK = Activity.RESULT_FIRST_USER
+const val EDIT_PILL_RESULT_OK = Activity.RESULT_FIRST_USER + 1

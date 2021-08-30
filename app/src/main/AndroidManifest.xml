@@ -3,14 +3,16 @@
     package="com.example.pillreminder">
 
     <application
+        android:name=".ToDoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PillReminder">
-        <activity android:name=".GUI.Test"></activity>
-        <activity android:name=".GUI.MainActivity">
+        <activity
+            android:name=".GUI.MainActivity"
+            android:windowSoftInputMode="adjustResize">>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
