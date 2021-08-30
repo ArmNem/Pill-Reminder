@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pillreminder.R
 import com.example.pillreminder.data.BEPill
+import com.example.pillreminder.data.SortOrder
 import com.example.pillreminder.databinding.FragmentPillsBinding
 import com.example.pillreminder.util.exhaustive
 import com.example.pillreminder.util.onQueryTextChanged
@@ -128,7 +129,13 @@ class MyPillsFragment : Fragment(R.layout.fragment_pills), PillsAdapter.OnItemCl
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_sortbyname -> {
+                viewModel.onSortOrderSelected(SortOrder.BY_NAME)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onDestroyView() {

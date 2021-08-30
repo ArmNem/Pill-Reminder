@@ -7,4 +7,9 @@
         app:showAsAction="always|collapseActionView"
         android:icon="@drawable/ic_search"
         android:title="Search" />
+    <item
+        android:icon="@drawable/ic_sort"
+        android:title="Sort"
+        app:showAsAction="always"
+        android:id="@+id/action_sortbyname"/>
 </menu>

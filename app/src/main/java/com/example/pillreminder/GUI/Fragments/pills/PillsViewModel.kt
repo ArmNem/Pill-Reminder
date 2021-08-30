@@ -7,6 +7,8 @@ import com.example.pillreminder.GUI.ADD_PILL_RESULT_OK
 import com.example.pillreminder.GUI.EDIT_PILL_RESULT_OK
 import com.example.pillreminder.data.BEPill
 import com.example.pillreminder.data.PillDAO
+import com.example.pillreminder.data.PreferencesManager
+import com.example.pillreminder.data.SortOrder
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
@@ -15,19 +17,24 @@ import kotlinx.coroutines.launch
 
 class PillsViewModel @ViewModelInject constructor(
     private val pillDAO: PillDAO,
+    private val preferencesManager: PreferencesManager,
     @Assisted private val state: SavedStateHandle
 ) : ViewModel() {
     val searchQuery = state.getLiveData("searchQuery", "")
+    val preferencesFlow = preferencesManager.preferencesFlow
     private val pillsEventChannel = Channel<PillEvent>()
     val pillEvent = pillsEventChannel.receiveAsFlow()
     private val pillFlow = combine(
-        searchQuery.asFlow()
-    ) { query ->
-        query
+        searchQuery.asFlow(),
+        preferencesFlow
+    ) { query, filterPreferences ->
+        Pair(query, filterPreferences)
     }.flatMapLatest {
-        pillDAO.getPillsBySearch(it.toString())
+        pillDAO.getPills(it.first,it.second.sortOrder)
     }
     val pills = pillFlow.asLiveData()
+    fun onSortOrderSelected(sortOrder: SortOrder) =
+        viewModelScope.launch { preferencesManager.updateSortOrder(sortOrder) }
 
     fun onPillSelected(pill: BEPill) = viewModelScope.launch {
         pillsEventChannel.send(PillEvent.NavigateToEditPillScreen(pill))
