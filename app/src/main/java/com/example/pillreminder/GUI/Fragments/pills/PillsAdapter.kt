@@ -40,6 +40,8 @@ class PillsAdapter(private val listener: OnItemClickListener) :
         fun bind(pill: BEPill) {
             binding.apply {
                 textviewName.text = pill.name
+                textviewDose.text = pill.dose
+                textviewType.text = pill.type
             }
         }
     }
