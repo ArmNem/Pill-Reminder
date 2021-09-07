@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     android:orientation="vertical"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
@@ -30,6 +31,77 @@
                 android:textSize="30sp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/item_reminder_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_blister" />
+
+            <LinearLayout
+                android:id="@+id/layout_pillname_dose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/item_reminder_icon"
+                android:layout_toRightOf="@id/item_reminder_icon"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/textview_reminder_pill_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Red pill"
+                    android:textColor="#4d4d4d" />
+
+                <TextView
+                    android:id="@+id/textview_reminder_pill_dose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1 tablet"
+                    android:textColor="#4d4d4d" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="200dp"
+                android:layout_toEndOf="@+id/layout_pillname_dose"
+                android:layout_toRightOf="@id/layout_pillname_dose"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <Switch
+                    android:id="@+id/switch_reminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,4 +1,4 @@
-package com.example.pillreminder.GUI.Fragments
+package com.example.pillreminder.GUI.Fragments.reminders
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,10 +10,10 @@ import com.example.pillreminder.R
 
 /**
  * A simple [Fragment] subclass.
- * Use the [NewReminderFragment.newInstance] factory method to
+ * Use the [AddEditReminderFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class NewReminderFragment : Fragment() {
+class AddEditReminderFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

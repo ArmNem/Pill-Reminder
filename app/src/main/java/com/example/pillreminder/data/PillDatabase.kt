@@ -11,11 +11,14 @@ import com.example.pillreminder.data.PillDAO
 import com.example.pillreminder.di.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.sql.Time
+import java.time.LocalTime
 
-@Database(entities = [BEPill::class], version= 1)
+@Database(entities = [BEPill::class, BEReminder::class], version = 1)
 abstract class PillDatabase : RoomDatabase() {
 
     abstract fun pillDao(): PillDAO
+    abstract fun reminderDao(): RemiderDAO
     class Callback @Inject constructor(
         private val database: Provider<PillDatabase>,
         @ApplicationScope private val applicationScope: CoroutineScope
@@ -23,10 +26,37 @@ abstract class PillDatabase : RoomDatabase() {
         RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            val dao = database.get().pillDao()
+            val pilldao = database.get().pillDao()
+            val reminderdao = database.get().reminderDao()
             applicationScope.launch {
-                dao.insert(BEPill("Blue pill","2 tablets per day","vitamin","Take this pill 2 times a day with food"))
-                dao.insert(BEPill("Red pill","1 tablet per day","vitamin","Take this pill once a day with food"))
+                pilldao.insert(
+                    BEPill(
+                        "Blue pill",
+                        "2 tablets per day",
+                        "vitamin",
+                        "Take this pill 2 times a day with food"
+                    )
+                )
+                pilldao.insert(
+                    BEPill(
+                        "Red pill",
+                        "1 tablet per day",
+                        "vitamin",
+                        "Take this pill once a day with food"
+                    )
+                )
+                reminderdao.insert(
+                    BEReminder(
+                        1,  System.currentTimeMillis(),
+                        false, "1", false
+                    )
+                )
+                reminderdao.insert(
+                    BEReminder(
+                        2,System.currentTimeMillis(),
+                        false, "2", false
+                    )
+                )
             }
 
         }
