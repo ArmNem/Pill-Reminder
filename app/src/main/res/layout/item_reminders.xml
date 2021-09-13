@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:orientation="vertical"
     app:cardElevation="2dp"
@@ -27,7 +27,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="10:00"
-                android:textColor="#4d4d4d"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -70,15 +69,13 @@
                     android:id="@+id/textview_reminder_pill_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Red pill"
-                    android:textColor="#4d4d4d" />
+                    android:text="Red pill" />
 
                 <TextView
                     android:id="@+id/textview_reminder_pill_dose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1 tablet"
-                    android:textColor="#4d4d4d" />
+                    android:text="1 tablet" />
 
             </LinearLayout>
 
@@ -86,7 +83,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="160dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/layout_pillname_dose"
                 android:layout_toRightOf="@id/layout_pillname_dose"
                 android:gravity="center_vertical"

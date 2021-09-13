@@ -2,6 +2,8 @@ package com.example.pillreminder.GUI.Fragments.pills
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -14,6 +16,7 @@ import com.example.pillreminder.databinding.FragmentAddEditPillBinding
 import com.example.pillreminder.util.exhaustive
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_add_edit_pill.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -22,13 +25,12 @@ class AddEditPillFragment : Fragment(R.layout.fragment_add_edit_pill) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentAddEditPillBinding.bind(view)
-
         binding.apply {
+            spinner()
             editTextPillname.setText(viewModel.pillName)
             editTextPilldose.setText(viewModel.pillDose)
             editTextPilltype.setText(viewModel.pillType)
             editTextPilldescript.setText(viewModel.pillDescription)
-
             editTextPillname.addTextChangedListener {
                 viewModel.pillName = it.toString()
             }
@@ -63,6 +65,43 @@ class AddEditPillFragment : Fragment(R.layout.fragment_add_edit_pill) {
                         findNavController().popBackStack()
                     }
                 }.exhaustive
+            }
+        }
+    }
+
+    fun spinner() {
+        context?.let {
+            ArrayAdapter.createFromResource(
+                it,
+                R.array.pill_daytime_array,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner_daytime.adapter = adapter
+
+                spinner_daytime.onItemSelectedListener =
+                    object : AdapterView.OnItemSelectedListener {
+                        override fun onNothingSelected(parent: AdapterView<*>?) {}
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            when(position){
+                                0 ->{
+                                     viewModel.pillDaytime = "Morning"
+                                }
+                                1 -> {
+                                    viewModel.pillDaytime = "Afternoon"
+                                }
+                                2 ->{
+                                    viewModel.pillDaytime = "Evening"
+                                }
+                            }
+                        }
+
+                    }
             }
         }
     }

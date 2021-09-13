@@ -15,6 +15,7 @@ data class BEPill(
     var name: String,
     var dose: String,
     var type: String,
+    var daytime: String,
     var description: String,
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
+    @PrimaryKey(autoGenerate = true) var pillId: Int = 0
 ) : Parcelable

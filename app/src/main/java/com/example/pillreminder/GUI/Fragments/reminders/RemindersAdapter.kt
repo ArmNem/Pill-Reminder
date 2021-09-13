@@ -41,7 +41,7 @@ class RemindersAdapter(private val listener:OnItemClickListener):
         fun bind(reminder: BEReminder) {
             binding.apply {
                 textviewRemindertime.text = reminder.alarmTime.toString()
-                textviewReminderPillDose.text = reminder.dose
+                textviewReminderPillDose.text = reminder.pilldose
                 switchReminder.isChecked = reminder.isActive
 
             }
@@ -54,7 +54,7 @@ class RemindersAdapter(private val listener:OnItemClickListener):
     }
     class DiffCallBack : DiffUtil.ItemCallback<BEReminder>() {
         override fun areItemsTheSame(oldItem: BEReminder, newItem: BEReminder) =
-            oldItem.id == newItem.id
+            oldItem.reminderId == newItem.reminderId
 
         override fun areContentsTheSame(oldItem: BEReminder, newItem: BEReminder) =
             oldItem == newItem

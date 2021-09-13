@@ -42,20 +42,19 @@ class PillsAdapter(private val listener: OnItemClickListener) :
                 textviewName.text = pill.name
                 textviewDose.text = pill.dose
                 textviewType.text = pill.type
+                texviewDaytime.text= pill.daytime
             }
         }
     }
 
 
     interface OnItemClickListener {
-
         fun onItemClick(pill: BEPill)
-
     }
 
     class DiffCallBack : DiffUtil.ItemCallback<BEPill>() {
         override fun areItemsTheSame(oldItem: BEPill, newItem: BEPill) =
-            oldItem.id == newItem.id
+            oldItem.pillId == newItem.pillId
 
         override fun areContentsTheSame(oldItem: BEPill, newItem: BEPill) =
             oldItem == newItem

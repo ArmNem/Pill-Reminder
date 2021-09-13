@@ -33,6 +33,7 @@
                     android:textColor="@color/colorPrimary" />
 
                 <EditText
+                    android:id="@+id/edittext_reminder_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Pill" />
@@ -65,13 +66,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatCheckBox
+                    <CheckBox
                         android:id="@+id/checkbox_everyday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Every day" />
 
-                    <androidx.appcompat.widget.AppCompatCheckBox
+                    <CheckBox
                         android:id="@+id/checkbox_today"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,8 +109,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textview_reminder_time"
+                    <EditText
+                        android:id="@+id/edittext_reminder_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

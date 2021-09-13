@@ -1,5 +1,6 @@
 package com.example.pillreminder.GUI.Fragments.pills
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pillreminder.GUI.MainActivity
 import com.example.pillreminder.R
 import com.example.pillreminder.data.BEPill
 import com.example.pillreminder.data.SortOrder
@@ -103,7 +105,6 @@ class MyPillsFragment : Fragment(R.layout.fragment_pills), PillsAdapter.OnItemCl
                     }
                 }.exhaustive
             }
-
         }
         setHasOptionsMenu(true)
     }
@@ -140,8 +141,6 @@ class MyPillsFragment : Fragment(R.layout.fragment_pills), PillsAdapter.OnItemCl
 
     override fun onDestroyView() {
         super.onDestroyView()
-        searchView.setOnQueryTextListener(null)
+       // searchView.setOnQueryTextListener(null)
     }
-
-
 }

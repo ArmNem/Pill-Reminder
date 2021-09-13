@@ -6,12 +6,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface RemiderDAO {
 
-    @Query("SELECT * from reminder_table order by id")
+    @Query("SELECT * from reminder_table order by reminderId")
     fun getAll(): Flow<List<BEReminder>>
-
-
-    @Query("SELECT * from reminder_table where id = (:id)")
-    fun getById(id: Int): Flow<BEReminder>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(p: BEReminder)

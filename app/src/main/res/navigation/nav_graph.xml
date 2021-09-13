@@ -28,4 +28,27 @@
             android:name="title"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/myRemindersFragment"
+        android:name="com.example.pillreminder.GUI.Fragments.reminders.MyRemindersFragment"
+        android:label="fragment_my_reminders"
+        tools:layout="@layout/fragment_my_reminders" >
+        <action
+            android:id="@+id/action_myRemindersFragment_to_addEditReminderFragment"
+            app:destination="@id/addEditReminderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditReminderFragment"
+        android:name="com.example.pillreminder.GUI.Fragments.reminders.AddEditReminderFragment"
+        android:label="fragment_new_reminder"
+        tools:layout="@layout/fragment_new_reminder" >
+        <argument
+            android:name="reminder"
+            app:argType="com.example.pillreminder.data.BEReminder"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

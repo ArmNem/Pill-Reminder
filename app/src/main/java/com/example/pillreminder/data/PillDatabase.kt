@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import java.sql.Time
 import java.time.LocalTime
 
-@Database(entities = [BEPill::class, BEReminder::class], version = 1)
+@Database(entities = [BEPill::class, BEReminder::class], version =1)
 abstract class PillDatabase : RoomDatabase() {
 
     abstract fun pillDao(): PillDAO
@@ -28,12 +28,20 @@ abstract class PillDatabase : RoomDatabase() {
             super.onCreate(db)
             val pilldao = database.get().pillDao()
             val reminderdao = database.get().reminderDao()
+            val pill = BEPill(
+                "Red pill",
+                "1 tablet per day",
+                "vitamin",
+                "Morning",
+                "Take this pill once a day with food"
+            )
             applicationScope.launch {
                 pilldao.insert(
                     BEPill(
                         "Blue pill",
                         "2 tablets per day",
                         "vitamin",
+                        "Morning",
                         "Take this pill 2 times a day with food"
                     )
                 )
@@ -42,19 +50,20 @@ abstract class PillDatabase : RoomDatabase() {
                         "Red pill",
                         "1 tablet per day",
                         "vitamin",
+                        "Morning",
                         "Take this pill once a day with food"
                     )
                 )
                 reminderdao.insert(
                     BEReminder(
-                        1,  System.currentTimeMillis(),
-                        false, "1", false
+                         Long.MAX_VALUE,
+                        false, "1", false,false,0, pill
                     )
                 )
                 reminderdao.insert(
                     BEReminder(
-                        2,System.currentTimeMillis(),
-                        false, "2", false
+                        Long.MAX_VALUE,
+                        false, "2", false,false,0,pill
                     )
                 )
             }

@@ -17,16 +17,13 @@ interface PillDAO {
     @Query("SELECT * FROM pill_table WHERE name LIKE '%' || :searchQuery || '%' ORDER BY name DESC, name")
     fun getPillsSortedByName(searchQuery: String): Flow<List<BEPill>>
 
-    @Query("SELECT * FROM pill_table WHERE name LIKE '%' || :searchQuery || '%' ORDER by name")
-    fun getPillsBySearch(searchQuery: String): Flow<List<BEPill>>
-
-    @Query("SELECT * from pill_table order by id")
+    @Query("SELECT * from pill_table order by pillId")
     fun getAll(): Flow<List<BEPill>>
 
     @Query("SELECT name from pill_table order by name")
     fun getAllPills(): Flow<List<String>>
 
-    @Query("SELECT * from pill_table where id = (:id)")
+    @Query("SELECT * from pill_table where pillId = (:id)")
     fun getById(id: Int): Flow<BEPill>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

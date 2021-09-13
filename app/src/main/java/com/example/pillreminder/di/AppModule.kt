@@ -28,6 +28,7 @@ object AppModule {
 
     @Provides
     fun provideTaskDao(db: PillDatabase) = db.pillDao()
+    @Provides
     fun provideReminderDao(db: PillDatabase)= db.reminderDao()
 
     @ApplicationScope

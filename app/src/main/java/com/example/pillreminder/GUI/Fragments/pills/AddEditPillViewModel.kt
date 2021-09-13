@@ -34,6 +34,11 @@ class AddEditPillViewModel @ViewModelInject constructor(
             field = value
             state.set("pillType", value)
         }
+    var pillDaytime = state.get<String>("pillDaytime")?: pill?.daytime ?: ""
+        set(value) {
+            field = value
+            state.set("pillDaytime", value)
+        }
     var pillDescription = state.get<String>("pillDescription") ?: pill?.description ?: ""
         set(value) {
             field = value
@@ -53,6 +58,7 @@ class AddEditPillViewModel @ViewModelInject constructor(
                 name = pillName,
                 dose = pillDose,
                 type = pillType,
+                daytime = pillDaytime,
                 description = pillDescription
             )
             updatePill(updatedPill)
@@ -61,6 +67,7 @@ class AddEditPillViewModel @ViewModelInject constructor(
                 name = pillName,
                 dose = pillDose,
                 type = pillType,
+                daytime = pillDaytime,
                 description = pillDescription
             )
             createPill(newPill)

@@ -7,4 +7,10 @@
         <item>Medicine</item>
 
     </string-array>
+    <string-array name="pill_daytime_array">
+        <item>Morning</item>
+        <item>Afternoon</item>
+        <item>Evening</item>
+
+    </string-array>
 </resources>
