@@ -11,11 +11,12 @@ import com.example.pillreminder.data.BEReminder
 import com.example.pillreminder.databinding.ItemPillsBinding
 import com.example.pillreminder.databinding.ItemRemindersBinding
 
-class RemindersAdapter(private val listener:OnItemClickListener):
+class RemindersAdapter(private val listener: OnItemClickListener) :
     ListAdapter<BEReminder, RemindersAdapter.RemindersViewHolder>(DiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RemindersViewHolder {
-        val binding = ItemRemindersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemRemindersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RemindersViewHolder(binding)
     }
 
@@ -47,11 +48,12 @@ class RemindersAdapter(private val listener:OnItemClickListener):
             }
         }
     }
-    interface OnItemClickListener {
 
+    interface OnItemClickListener {
         fun onItemClick(reminder: BEReminder)
 
     }
+
     class DiffCallBack : DiffUtil.ItemCallback<BEReminder>() {
         override fun areItemsTheSame(oldItem: BEReminder, newItem: BEReminder) =
             oldItem.reminderId == newItem.reminderId

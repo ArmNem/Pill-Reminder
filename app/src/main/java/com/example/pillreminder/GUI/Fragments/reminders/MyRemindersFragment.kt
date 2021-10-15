@@ -1,10 +1,14 @@
 package com.example.pillreminder.GUI.Fragments.reminders
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.CallSuper
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +27,7 @@ import com.example.pillreminder.databinding.FragmentPillsBinding
 import com.example.pillreminder.util.exhaustive
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.item_reminders.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -56,12 +61,13 @@ class MyRemindersFragment : Fragment(R.layout.fragment_my_reminders),
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val reminder = remindersAdapter.currentList[viewHolder.adapterPosition]
-                    viewModel.onPillSwiped(reminder)
+                    viewModel.onReminderSwiped(reminder)
                 }
             }).attachToRecyclerView(recyclerViewReminders)
             fabAddReminder.setOnClickListener {
                 viewModel.onAddNewReminderClick()
             }
+           // switch_reminder.setOnClickListener { viewModel.activateReminder() }
         }
         setFragmentResultListener("add_edit_request") { _, bundle ->
             val result = bundle.getInt("add_edit_result")
@@ -87,7 +93,16 @@ class MyRemindersFragment : Fragment(R.layout.fragment_my_reminders),
                                 null,
                                 "New reminder"
                             )
-                        findNavController().navigate(action)
+                        if(findNavController().currentDestination?.id==R.id.addEditReminderFragment){
+                            findNavController().navigate(action)
+                        }else {
+                            Log.d("NAV", "Current destination is: " + findNavController().currentDestination)
+                        }
+
+                    }
+                    is RemindersViewModel.ReminderEvent.ActivateReminder -> {
+                        Toast.makeText(requireContext(), "Reminder activated", Toast.LENGTH_LONG).show()
+
                     }
                     is RemindersViewModel.ReminderEvent.NavigateToEditReminderScreen -> {
                         val action =
@@ -95,11 +110,19 @@ class MyRemindersFragment : Fragment(R.layout.fragment_my_reminders),
                                 event.reminder,
                                 "Edit reminder"
                             )
-                        findNavController().navigate(action)
+                        if(findNavController().currentDestination?.id==R.id.addEditReminderFragment){
+                            findNavController().navigate(action)
+                        }else {
+                            Log.d("NAV", "Current destination is: " + findNavController().currentDestination)
+                        }
                     }
                     is RemindersViewModel.ReminderEvent.showReminderSavedConfirmationMessage -> {
                         Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_SHORT).show()
                     }
+                    is RemindersViewModel.ReminderEvent.ActivateReminder -> {
+                        Snackbar.make(requireView(), "Reminder activated", Snackbar.LENGTH_LONG).show()
+                    }
+                    else -> true
                 }.exhaustive
             }
         }
@@ -112,5 +135,10 @@ class MyRemindersFragment : Fragment(R.layout.fragment_my_reminders),
 
     override fun onDestroyView() {
         super.onDestroyView()
+    }
+
+    @CallSuper
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

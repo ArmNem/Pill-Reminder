@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/myPillsFragment"
         android:name="com.example.pillreminder.GUI.Fragments.pills.MyPillsFragment"
-        android:label="fragment_my_pills"
-        tools:layout="@layout/fragment_pills" >
+        android:label="My Pills"
+        tools:layout="@layout/fragment_pills">
         <action
             android:id="@+id/action_myPillsFragment_to_addEditPillFragment"
             app:destination="@id/addEditPillFragment" />
@@ -17,13 +17,13 @@
     <fragment
         android:id="@+id/addEditPillFragment"
         android:name="com.example.pillreminder.GUI.Fragments.pills.AddEditPillFragment"
-        android:label="fragment_add_edit_pill"
-        tools:layout="@layout/fragment_add_edit_pill" >
+        android:label="Add/Edit Pill"
+        tools:layout="@layout/fragment_add_edit_pill">
         <argument
             android:name="pill"
+            android:defaultValue="@null"
             app:argType="com.example.pillreminder.data.BEPill"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="title"
             app:argType="string" />
@@ -31,8 +31,8 @@
     <fragment
         android:id="@+id/myRemindersFragment"
         android:name="com.example.pillreminder.GUI.Fragments.reminders.MyRemindersFragment"
-        android:label="fragment_my_reminders"
-        tools:layout="@layout/fragment_my_reminders" >
+        android:label="My Reminders"
+        tools:layout="@layout/fragment_my_reminders">
         <action
             android:id="@+id/action_myRemindersFragment_to_addEditReminderFragment"
             app:destination="@id/addEditReminderFragment" />
@@ -40,15 +40,38 @@
     <fragment
         android:id="@+id/addEditReminderFragment"
         android:name="com.example.pillreminder.GUI.Fragments.reminders.AddEditReminderFragment"
-        android:label="fragment_new_reminder"
-        tools:layout="@layout/fragment_new_reminder" >
+        android:label="Add/Edit Reminder"
+        tools:layout="@layout/fragment_new_reminder">
         <argument
             android:name="reminder"
+            android:defaultValue="@null"
             app:argType="com.example.pillreminder.data.BEReminder"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="title"
             app:argType="string" />
+        <action
+            android:id="@+id/action_addEditReminderFragment_to_timepickerFragment"
+            app:destination="@id/timepickerFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/deleteItemFragment"
+        android:name="com.example.pillreminder.GUI.Fragments.delete.DeleteItemFragment"
+        android:label="DeleteItemFragment" /><action android:id="@+id/action_global_deleteItemFragment" app:destination="@id/deleteItemFragment"/>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.pillreminder.GUI.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/timepickerFragment"
+        android:name="com.example.pillreminder.GUI.Fragments.timepicker.TimepickerFragment"
+        android:label="timepicker"
+        tools:layout="@layout/timepicker" >
+        <argument
+            android:name="Reminder"
+            app:argType="com.example.pillreminder.data.BEReminder"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

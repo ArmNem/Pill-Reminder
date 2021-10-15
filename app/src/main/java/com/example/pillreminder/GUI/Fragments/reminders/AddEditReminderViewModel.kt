@@ -1,16 +1,15 @@
 package com.example.pillreminder.GUI.Fragments.reminders
 
+import android.app.Application
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pillreminder.GUI.ADD_PILL_RESULT_OK
 import com.example.pillreminder.GUI.EDIT_PILL_RESULT_OK
-import com.example.pillreminder.GUI.Fragments.pills.AddEditPillViewModel
 import com.example.pillreminder.data.BEPill
 import com.example.pillreminder.data.BEReminder
-import com.example.pillreminder.data.PillDAO
 import com.example.pillreminder.data.RemiderDAO
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -19,7 +18,7 @@ import kotlinx.coroutines.launch
 class AddEditReminderViewModel @ViewModelInject constructor(
     private val reminderDao: RemiderDAO,
     @Assisted private val state: SavedStateHandle
-) : ViewModel() {
+) : AndroidViewModel(Application()) {
     val reminder = state.get<BEReminder>("reminder")
     val pill = BEPill(
         "Red pill",
@@ -38,7 +37,7 @@ class AddEditReminderViewModel @ViewModelInject constructor(
             field = value
             state.set("isEveryDay", value)
         }
-    var alarmtime = state.get<Long>("alarmTime") ?: reminder?.alarmTime ?: Long.MAX_VALUE
+    var alarmtime = state.get<String>("alarmTime") ?: reminder?.alarmTime ?: ""
         set(value) {
             field = value
             state.set("alarmTime", value)
@@ -89,6 +88,23 @@ class AddEditReminderViewModel @ViewModelInject constructor(
             createReminder(newReminder)
         }
     }
+    /*fun openTimePicker() = viewModelScope.launch{
+       /* val currentTime = Calendar.getInstance()
+        var hour = currentTime.get(Calendar.HOUR_OF_DAY)
+        var minute = currentTime.get(Calendar.MINUTE)
+
+        val timePicker =  TimePickerDialog(getApplication(), TimePickerDialog.OnTimeSetListener(){ timePicker: TimePicker, i: Int, i1: Int ->
+            fun onTimeSet(timepicker: TimePicker, selectedhour: Int, selectedminute: Int){
+                hour = selectedhour
+                minute = selectedminute
+
+            }
+        },hour,minute,false)
+        timePicker.setTitle("Select time")
+        timePicker.show()*/
+        val reminder = state.get<BEReminder>("reminder")
+        addEditRemiderEventChannel.send(AddEditReminderEvent.NavigateToTimePickerPage(reminder))
+    }*/
 
     private fun updateReminder(reminder: BEReminder) = viewModelScope.launch {
         reminderDao.update(reminder)
@@ -116,5 +132,9 @@ class AddEditReminderViewModel @ViewModelInject constructor(
     sealed class AddEditReminderEvent {
         data class ShowInvalidInputMessage(val msg: String) : AddEditReminderEvent()
         data class NavigateBackWithResult(val result: Int) : AddEditReminderEvent()
+        //data class NavigateToTimePickerPage(val reminder: BEReminder?): AddEditReminderEvent()
     }
+
+
+
 }

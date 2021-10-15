@@ -42,7 +42,7 @@ class PillsAdapter(private val listener: OnItemClickListener) :
                 textviewName.text = pill.name
                 textviewDose.text = pill.dose
                 textviewType.text = pill.type
-                texviewDaytime.text= pill.daytime
+                texviewDaytime.text = pill.daytime
             }
         }
     }

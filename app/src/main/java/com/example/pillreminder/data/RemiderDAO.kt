@@ -9,9 +9,15 @@ interface RemiderDAO {
     @Query("SELECT * from reminder_table order by reminderId")
     fun getAll(): Flow<List<BEReminder>>
 
+    /*@Query("SELECT * from reminder_table WHERE reminderId = reminderId")
+    suspend fun getReminderById(id: Int): BEReminder
+*/
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(p: BEReminder)
 
+   /* @Query("UPDATE reminder_table SET alarmTime = alarmTime WHERE reminderId = reminderId")
+    suspend fun updateReminderTime(time: Long, id: Int)
+*/
     @Update
     suspend fun update(p: BEReminder)
 

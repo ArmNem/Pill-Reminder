@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import java.sql.Time
 import java.time.LocalTime
 
-@Database(entities = [BEPill::class, BEReminder::class], version =1)
+@Database(entities = [BEPill::class, BEReminder::class], version =2)
 abstract class PillDatabase : RoomDatabase() {
 
     abstract fun pillDao(): PillDAO
@@ -56,13 +56,13 @@ abstract class PillDatabase : RoomDatabase() {
                 )
                 reminderdao.insert(
                     BEReminder(
-                         Long.MAX_VALUE,
+                         "10:00",
                         false, "1", false,false,0, pill
                     )
                 )
                 reminderdao.insert(
                     BEReminder(
-                        Long.MAX_VALUE,
+                        "10:00",
                         false, "2", false,false,0,pill
                     )
                 )

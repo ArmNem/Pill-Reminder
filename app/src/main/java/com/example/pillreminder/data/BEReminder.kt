@@ -10,7 +10,7 @@ import java.sql.Time
 )
 @Parcelize
 data class BEReminder(
-    var alarmTime: Long,
+    var alarmTime: String,
     var isEveryDay: Boolean,
     var pilldose: String,
     var isActive: Boolean,

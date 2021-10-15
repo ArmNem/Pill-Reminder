@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.annotation.CallSuper
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -31,6 +32,12 @@ class AddEditPillFragment : Fragment(R.layout.fragment_add_edit_pill) {
             editTextPilldose.setText(viewModel.pillDose)
             editTextPilltype.setText(viewModel.pillType)
             editTextPilldescript.setText(viewModel.pillDescription)
+            when(viewModel.pillDaytime)
+            {
+                "Morning" -> spinnerDaytime.setSelection(0)
+                "Afternoon" -> spinnerDaytime.setSelection(1)
+                "Evening" -> spinnerDaytime.setSelection(2)
+            }
             editTextPillname.addTextChangedListener {
                 viewModel.pillName = it.toString()
             }
@@ -58,12 +65,14 @@ class AddEditPillFragment : Fragment(R.layout.fragment_add_edit_pill) {
                         binding.editTextPilldose.clearFocus()
                         binding.editTextPilltype.clearFocus()
                         binding.editTextPilldescript.clearFocus()
+                        binding.spinnerDaytime.clearFocus()
                         setFragmentResult(
                             "add_edit_request",
                             bundleOf("add_edit_result" to event.result)
                         )
                         findNavController().popBackStack()
                     }
+                    else -> true
                 }.exhaustive
             }
         }
@@ -104,5 +113,10 @@ class AddEditPillFragment : Fragment(R.layout.fragment_add_edit_pill) {
                     }
             }
         }
+    }
+
+    @CallSuper
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
     }
 }

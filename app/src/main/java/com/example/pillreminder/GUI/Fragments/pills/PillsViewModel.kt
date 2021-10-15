@@ -68,5 +68,6 @@ class PillsViewModel @ViewModelInject constructor(
         data class NavigateToEditPillScreen(val pill: BEPill) : PillEvent()
         data class ShowUndoDeletePillMessage(val pill: BEPill) : PillEvent()
         data class showPillSavedConfirmationMessage(val msg: String): PillEvent()
+        //data class NavigateToDeleteItemScreen(val pill: BEPill): PillEvent()
     }
 }

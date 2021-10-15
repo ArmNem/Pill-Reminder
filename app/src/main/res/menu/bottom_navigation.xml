@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_mypills"
+        android:id="@+id/myPillsFragment"
         android:icon="@drawable/ic_baseline_medication_24"
         android:title="MyPills" />
 
     <item
-        android:id="@+id/nav_myremiders"
+        android:id="@+id/myRemindersFragment"
         android:icon="@drawable/ic_baseline_calendar_today_24"
         android:title="MyReminders" />
     <item
@@ -15,7 +15,7 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home" />
     <item
-        android:id="@+id/nav_newreminder"
+        android:id="@+id/addEditReminderFragment"
         android:icon="@drawable/ic_baseline_edit_calendar_24"
         android:title="NewReminder" />
     <item

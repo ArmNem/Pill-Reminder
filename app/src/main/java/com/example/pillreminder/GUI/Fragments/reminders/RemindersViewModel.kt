@@ -49,7 +49,14 @@ class RemindersViewModel @ViewModelInject constructor(
         remiderDAO.insert(reminder)
     }
 
-    fun onPillSwiped(reminder: BEReminder) = viewModelScope.launch {
+    fun activateReminder() = viewModelScope.launch {
+
+        remindersEventChannel.send(
+            ReminderEvent.ActivateReminder
+        )
+    }
+
+    fun onReminderSwiped(reminder: BEReminder) = viewModelScope.launch {
         remiderDAO.delete(reminder)
         remindersEventChannel.send(
             ReminderEvent.ShowUndoDeleteReminderMessage(
@@ -61,9 +68,8 @@ class RemindersViewModel @ViewModelInject constructor(
     sealed class ReminderEvent {
         object NavigateToAddReminderScreen : ReminderEvent()
         data class NavigateToEditReminderScreen(val reminder: BEReminder) : ReminderEvent()
-        data class ShowUndoDeleteReminderMessage(val reminder: BEReminder) :
-            ReminderEvent()
-
+        data class ShowUndoDeleteReminderMessage(val reminder: BEReminder) : ReminderEvent()
         data class showReminderSavedConfirmationMessage(val msg: String) : ReminderEvent()
+        object ActivateReminder: ReminderEvent()
     }
 }
